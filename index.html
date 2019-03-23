@@ -1,258 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Encrypt / Decrypt</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-      crossorigin="anonymous"
-    />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Encrypt / Decrypt</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
-  <body id="body">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body id="body">
+  <br />
+  <div class="container">
     <br />
-    <div class="container">
+
+    <div class="jumbotron text-center">
+      <h2 class="text-center">
+        Encrypt <i class="fas fa-lock"></i> / Decrypt
+        <i class="fas fa-unlock-alt"></i>
+      </h2>
       <br />
 
-      <div class="jumbotron text-center">
-        <h2 class="text-center">
-          Encrypt <i class="fas fa-lock"></i> / Decrypt
-          <i class="fas fa-unlock-alt"></i>
-        </h2>
-        <br />
+      <br />
 
-        <br />
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <h4 class="text-center">Char / Binary Table</h4>
+          <br />
+          <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Character</th>
+                <th scope="col">Binary Code</th>
+              </tr>
+            </thead>
+            <tbody>
+              <div id="tablelist"></div>
 
-        <div class="row">
-          <div class="col-sm-12 col-md-6">
-            <h4 class="text-center">Char / Binary Table</h4>
-            <br />
-            <table class="table table-striped table-bordered table-hover">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">Character</th>
-                  <th scope="col">Binary Code</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>A</td>
-                  <td>00000</td>
-                </tr>
-                <tr>
-                  <td>B</td>
-                  <td>00001</td>
-                </tr>
-                <tr>
-                  <td>C</td>
-                  <td>00010</td>
-                </tr>
-                <tr>
-                  <td>D</td>
-                  <td>00011</td>
-                </tr>
-                <tr>
-                  <td>E</td>
-                  <td>00100</td>
-                </tr>
-                <tr>
-                  <td>F</td>
-                  <td>00101</td>
-                </tr>
-                <tr>
-                  <td>G</td>
-                  <td>00110</td>
-                </tr>
-                <tr>
-                  <td>H</td>
-                  <td>00111</td>
-                </tr>
-                <tr>
-                  <td>I</td>
-                  <td>01000</td>
-                </tr>
-                <tr>
-                  <td>J</td>
-                  <td>01001</td>
-                </tr>
-                <tr>
-                  <td>K</td>
-                  <td>01010</td>
-                </tr>
-                <tr>
-                  <td>L</td>
-                  <td>01011</td>
-                </tr>
-                <tr>
-                  <td>M</td>
-                  <td>01100</td>
-                </tr>
-                <tr>
-                  <td>N</td>
-                  <td>01101</td>
-                </tr>
-                <tr>
-                  <td>O</td>
-                  <td>01110</td>
-                </tr>
-                <tr>
-                  <td>P</td>
-                  <td>01111</td>
-                </tr>
-                <tr>
-                  <td>Q</td>
-                  <td>10000</td>
-                </tr>
-                <tr>
-                  <td>R</td>
-                  <td>10001</td>
-                </tr>
-                <tr>
-                  <td>S</td>
-                  <td>10010</td>
-                </tr>
-                <tr>
-                  <td>T</td>
-                  <td>10011</td>
-                </tr>
-                <tr>
-                  <td>U</td>
-                  <td>10100</td>
-                </tr>
-                <tr>
-                  <td>V</td>
-                  <td>10101</td>
-                </tr>
-                <tr>
-                  <td>W</td>
-                  <td>10110</td>
-                </tr>
-                <tr>
-                  <td>X</td>
-                  <td>10111</td>
-                </tr>
-                <tr>
-                  <td>Y</td>
-                  <td>11000</td>
-                </tr>
-                <tr>
-                  <td>Z</td>
-                  <td>11001</td>
-                </tr>
-                <tr>
-                  <td>.</td>
-                  <td>11010</td>
-                </tr>
-                <tr>
-                  <td>,</td>
-                  <td>11011</td>
-                </tr>
-                <tr>
-                  <td>[SPACE]</td>
-                  <td>11100</td>
-                </tr>
-              </tbody>
-            </table>
-            <hr class="my-4" />
-          </div>
 
-          <div class="col-sm-12 col-md-6">
-            <h3 class="text-center">Convertors</h3>
-            <br />
+            </tbody>
 
-            <div class="form-group">
-              <label class="lead" for="word">Text to Binary</label>
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-10 col-sm-12 mb-2">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="word"
-                      placeholder="Enter word"
-                    />
-                  </div>
-                  <br />
-                  <div class="col-md-2 col-sm-12 justify-content-center">
-                    <div onclick="getWord()" class="btn btn-primary">
-                      Convert
-                    </div>
+          </table>
+          <hr class="my-4" />
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+          <h3 class="text-center">Convertors</h3>
+          <br />
+
+          <div class="form-group">
+            <label class="lead" for="word">Text to Binary</label>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-10 col-sm-12 mb-2">
+                  <input type="text" class="form-control" id="word" placeholder="Enter word" />
+                </div>
+                <br />
+                <div class="col-md-2 col-sm-12 justify-content-center">
+                  <div id="chartobinary" class="btn btn-primary">
+                    Convert
                   </div>
                 </div>
               </div>
-              <br />
-
-              <div class="lead" id="coded"></div>
-              <br />
-              <div id="error"></div>
             </div>
+            <br />
 
-            <hr class="my-4" />
+            <div class="lead">
+              <code>
+                <div id="coded"></div>
+              </code>
+            </div>
+            <br />
+            <div id="error"></div>
+          </div>
 
-            <div class="form-group">
-              <label class="lead" for="word"
-                >Code (you have to convert 5bits per time)</label
-              >
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-10 col-sm-12 mb-2">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="code"
-                      placeholder="Enter code"
-                    />
-                  </div>
-                  <br />
-                  <div class="col-md-2 col-sm-12">
-                    <div onclick="turnBack()" class="btn btn-primary">
-                      Convert
-                    </div>
+          <hr class="my-4" />
+
+          <div class="form-group">
+            <label class="lead" for="word">Binary To Text</label>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-10 col-sm-12 mb-2">
+                  <input type="text" class="form-control" id="code" placeholder="Enter code" />
+                </div>
+                <br />
+                <div class="col-md-2 col-sm-12">
+                  <div id="binarytochar" class="btn btn-primary">
+                    Convert
                   </div>
                 </div>
               </div>
-              <br />
-
-              <div class="lead" id="decoded"></div>
             </div>
-
             <br />
+
+            <div class="lead">
+              <code>
+                <div id="decoded"></div>
+              </code>
+            </div>
           </div>
+
+          <br />
         </div>
       </div>
-      <p class="text-center lead text-white">
-        Made by ❤️ by En!
-      </p>
     </div>
+    <p class="text-center lead text-white">
+      Made by ❤️ by En!
+    </p>
+  </div>
 
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <script src="script.js"></script>
-  </body>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <script src="script.js"></script>
+</body>
+
 </html>
