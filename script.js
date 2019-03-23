@@ -352,3 +352,22 @@ function addRow(tableID) {
 }
 // Call addRow() with the table's ID
 addRow('char-binary');
+
+
+
+// a function that captures the url 
+function getQueryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  }
+  return (false);
+}
+
+
+
+console.log(getQueryVariable("b"));
