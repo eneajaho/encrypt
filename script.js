@@ -333,13 +333,22 @@ function EightBitsToChar(bitsArray) {
 }
 
 
-
 // function that shows the table in html
+// https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/insertRow
+function addRow(tableID) {
+  // Get a reference to the table
+  let tableRef = document.getElementById(tableID);
 
-let ShowTable = [];
-for (i = 0; i < Binary.length; i++) {
-  ShowTable += "<tr><td>" + char[i] + "</td><td>" + Binary[i] + "</td><tr>";
-  ShowTable += " ";
+  for (i = 0; i < Binary.length; i++) {
+    let newRow = tableRef.insertRow(-1);
+    // Insert a cell in the row at index 0
+    let FirstCell = newRow.insertCell(0);
+    let SecondCell = newRow.insertCell(1);
+    let CharValue = document.createTextNode(char[i]);
+    let BinaryValue = document.createTextNode(ArrayToText(Binary[i], Binary[i], 1));
+    FirstCell.appendChild(CharValue);
+    SecondCell.appendChild(BinaryValue);
+  }
 }
-console.log(ShowTable);
-showText("tablelist", ShowTable);
+// Call addRow() with the table's ID
+addRow('char-binary');
