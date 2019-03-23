@@ -369,5 +369,4 @@ function getQueryVariable(variable) {
 }
 
 
-
 console.log(getQueryVariable("b"));
