@@ -202,18 +202,25 @@ var char = [
   "\n"
 ];
 
-Binary.sort(function() {
-  key = 0.5 - Math.random();
-  console.log(key);
-  return key;
-});
+addRow("char-binary", Binary);
 
 var convertBtn = document.getElementById("chartobinary");
 convertBtn.addEventListener("click", function getWord() {
+  // get the encrypt key of the table
+  var keyencrypt = document.getElementById("keyencrypt").value;
+  // copy Binary table to a new one so we dont change the default values
+  BinaryToShuffle = Binary;
+  // console.log(keyencrypt);
+  if (keyencrypt != "") {
+    // sorts the table based on the key
+    sortTableSeedBased(BinaryToShuffle, keyencrypt);
+  }
+
+  addRow("char-binary", BinaryToShuffle);
   // get the word
   var word = document.getElementById("word").value;
 
-  BitsMatrix = createBitsMatrix(word);
+  BitsMatrix = createBitsMatrix(word, BinaryToShuffle);
 
   BitsArray = createBitsArray(word, BitsMatrix);
 
@@ -224,7 +231,7 @@ convertBtn.addEventListener("click", function getWord() {
 
 /* Functions for creating and showing the BitsArray*/
 
-function createBitsMatrix(word) {
+function createBitsMatrix(word, arr) {
   /* 
   Create a wordS array where we will save the word bits
   We loop through the char array to find a match for every char of the word .. word[i]
@@ -233,9 +240,9 @@ function createBitsMatrix(word) {
 
   var BitsMatrix = [];
   for (i = 0; i < word.length; i++) {
-    for (j = 0; j < Binary.length; j++) {
+    for (j = 0; j < arr.length; j++) {
       if (word[i] == char[j]) {
-        BitsMatrix.push(Binary[j]);
+        BitsMatrix.push(arr[j]);
       }
     }
   }
@@ -267,15 +274,27 @@ function showText(id, text) {
 
 var decodeBtn = document.getElementById("binarytochar");
 decodeBtn.addEventListener("click", function turnBack() {
+  // get the encrypt key of the table
+  var keydecrypt = document.getElementById("keydecrypt").value;
+
+  BinaryToShuffle1 = Binary;
+
+  if (keydecrypt != "") {
+    // sorts the table based on the key
+    sortTableSeedBased(BinaryToShuffle1, keydecrypt);
+  }
+
+  addRow("char-binary", BinaryToShuffle1);
+
   var code = document.getElementById("code").value;
   code = code.replace(/\s+/g, "");
 
-  CharArray = BitsToChars(code);
+  CharArray = BitsToChars(code, BinaryToShuffle1);
   CharText = CharArray.join("");
   showText("decoded", CharText);
 });
 
-function BitsToChars(code) {
+function BitsToChars(code, arr) {
   // Declaring an array for later use
   let SevenBitArray = [];
   // CharArray will keep the decoded characters
@@ -295,7 +314,7 @@ function BitsToChars(code) {
       }
       // after getting the array of bits we use the function EightBitsToChar to get the char of that group of bits
       // and than we add the char to a CharArray
-      Character = EightBitsToChar(SevenBitArray);
+      Character = EightBitsToChar(SevenBitArray, arr);
       CharArray.push(Character);
     }
   }
@@ -303,12 +322,12 @@ function BitsToChars(code) {
 }
 
 // accepts an array of bits, and return the character of that group of bits
-function EightBitsToChar(bitsArray) {
-  for (i = 0; i < Binary.length; i++) {
+function EightBitsToChar(bitsArray, arr) {
+  for (i = 0; i < arr.length; i++) {
     // k to count if 5 bits are the same if yes add to array
     let k = 0;
     for (j = 0; j < 8; j++) {
-      if (bitsArray[j] == Binary[i][j]) {
+      if (bitsArray[j] == arr[i][j]) {
         k++;
       }
     }
@@ -322,23 +341,45 @@ function EightBitsToChar(bitsArray) {
 
 // function that shows the table in html
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/insertRow
-function addRow(tableID) {
+function addRow(tableID, arr) {
+  // firstly deletes all table rows except the header
+  var Parent = document.getElementById(tableID);
+  while (Parent.hasChildNodes()) {
+    Parent.removeChild(Parent.firstChild);
+  }
+
   // Get a reference to the table
   let tableRef = document.getElementById(tableID);
 
-  for (i = 0; i < Binary.length; i++) {
+  for (i = 0; i < arr.length; i++) {
     let newRow = tableRef.insertRow(-1);
     // Insert a cell in the row at index 0
     let FirstCell = newRow.insertCell(0);
     let SecondCell = newRow.insertCell(1);
     let CharValue = document.createTextNode(char[i]);
-    let BinaryValue = document.createTextNode(Binary[i].join(""));
+    let BinaryValue = document.createTextNode(arr[i].join(""));
     FirstCell.appendChild(CharValue);
     SecondCell.appendChild(BinaryValue);
   }
 }
+
 // Call addRow() with the table's ID
-addRow("char-binary");
+// addRow("char-binary");
+
+// Sort the table based on the key
+function sortTableSeedBased(arr, seed) {
+  arr.sort(function() {
+    seed = getNextValue(seed);
+    key = 0.5 - seed;
+    //console.log(key);
+    return key;
+  });
+}
+
+function getNextValue(seed) {
+  seed = (seed * 9301 + 49297) % 2332;
+  return seed / 2332;
+}
 
 // a function that captures the url
 function getQueryVariable(variable) {
