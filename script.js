@@ -411,5 +411,5 @@ if (getQueryVariable("word") != "" && getQueryVariable("key") != "") {
 
 // if user inserts the code and key from url
 if (getQueryVariable("code") != "" && getQueryVariable("key") != "") {
-  turnBack(getQueryVariable("k"), getQueryVariable("b"));
+  turnBack(getQueryVariable("key"), getQueryVariable("code"));
 }
