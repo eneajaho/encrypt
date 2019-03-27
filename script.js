@@ -199,12 +199,17 @@ var char = [
   " ",
   "ë",
   "ç",
-  "\n",
+  "\n"
 ];
 
+Binary.sort(function() {
+  key = 0.5 - Math.random();
+  console.log(key);
+  return key;
+});
 
-var convertBtn = document.getElementById('chartobinary');
-convertBtn.addEventListener('click', function getWord() {
+var convertBtn = document.getElementById("chartobinary");
+convertBtn.addEventListener("click", function getWord() {
   // get the word
   var word = document.getElementById("word").value;
 
@@ -212,12 +217,10 @@ convertBtn.addEventListener('click', function getWord() {
 
   BitsArray = createBitsArray(word, BitsMatrix);
 
-  BitsText = ArrayToText(word, BitsArray, 8);
+  BitsText = BitsArray.join("");
 
   showText("coded", BitsText);
-
 });
-
 
 /* Functions for creating and showing the BitsArray*/
 
@@ -254,42 +257,22 @@ function createBitsArray(word, BitsMatrix) {
   return BitsArray;
 }
 
-function ArrayToText(word, Array, BitLength) {
-  /* 
-  Declares a var and adds array's bits to it
-  So, it turns an array to a string var 
-  ? BitLength is used to sum length of the bit. 
-  * Ex: When we want to Convert From Char to Bit, BitLength will be 8 
-  * When we want to Convert From Bits To Chars, Bitlength will be 1
-  */
-  var Text = "";
-  for (l = 0; l < word.length * BitLength; l++) {
-    Text += "" + Array[l];
-  }
-  return Text;
-}
-
 function showText(id, text) {
   // a function that accepts an id and text and
   id = String(id);
   document.getElementById(id).innerHTML = text;
 }
 
-
 /* Converting Bits to characters */
 
-var decodeBtn = document.getElementById('binarytochar');
-decodeBtn.addEventListener('click', function turnBack() {
-
+var decodeBtn = document.getElementById("binarytochar");
+decodeBtn.addEventListener("click", function turnBack() {
   var code = document.getElementById("code").value;
   code = code.replace(/\s+/g, "");
 
   CharArray = BitsToChars(code);
-
-  // we use ArrayToText function to convert that CharArray to Text and than show it in html
-  CharText = ArrayToText(CharArray, CharArray, 1);
+  CharText = CharArray.join("");
   showText("decoded", CharText);
-
 });
 
 function BitsToChars(code) {
@@ -302,9 +285,9 @@ function BitsToChars(code) {
   for (let a = 0; a < code.length; a++) {
     // if 8 bits are completed than do ...
     if (a % 8 == 0) {
-      // Declare BitCounter That will count from 0 to 7 
+      // Declare BitCounter That will count from 0 to 7
       let BitCounter = 0;
-      // j will start from a and will go to a+8 .. 
+      // j will start from a and will go to a+8 ..
       for (j = a; j < a + 8; j++) {
         // adds bit from code to SevenBitArray and than increases the counter
         SevenBitArray[BitCounter] = code[j];
@@ -321,7 +304,6 @@ function BitsToChars(code) {
 
 // accepts an array of bits, and return the character of that group of bits
 function EightBitsToChar(bitsArray) {
-
   for (i = 0; i < Binary.length; i++) {
     // k to count if 5 bits are the same if yes add to array
     let k = 0;
@@ -338,7 +320,6 @@ function EightBitsToChar(bitsArray) {
   }
 }
 
-
 // function that shows the table in html
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement/insertRow
 function addRow(tableID) {
@@ -351,17 +332,15 @@ function addRow(tableID) {
     let FirstCell = newRow.insertCell(0);
     let SecondCell = newRow.insertCell(1);
     let CharValue = document.createTextNode(char[i]);
-    let BinaryValue = document.createTextNode(ArrayToText(Binary[i], Binary[i], 1));
+    let BinaryValue = document.createTextNode(Binary[i].join(""));
     FirstCell.appendChild(CharValue);
     SecondCell.appendChild(BinaryValue);
   }
 }
 // Call addRow() with the table's ID
-addRow('char-binary');
+addRow("char-binary");
 
-
-
-// a function that captures the url 
+// a function that captures the url
 function getQueryVariable(variable) {
   var query = window.location.search.substring(1);
   var vars = query.split("&");
@@ -371,8 +350,7 @@ function getQueryVariable(variable) {
       return pair[1];
     }
   }
-  return (false);
+  return false;
 }
-
 
 console.log(getQueryVariable("b"));
