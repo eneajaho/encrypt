@@ -209,7 +209,7 @@ convertBtn.addEventListener("click", function getWord() {
   // get the encrypt key of the table
   var keyencrypt = document.getElementById("keyencrypt").value;
   // copy Binary table to a new one so we dont change the default values
-  BinaryToShuffle = Binary;
+  BinaryToShuffle = Array.from(Binary);
   // console.log(keyencrypt);
   if (keyencrypt != "") {
     // sorts the table based on the key
@@ -277,7 +277,7 @@ decodeBtn.addEventListener("click", function turnBack() {
   // get the encrypt key of the table
   var keydecrypt = document.getElementById("keydecrypt").value;
 
-  BinaryToShuffle1 = Binary;
+  BinaryToShuffle1 = Array.from(Binary);
 
   if (keydecrypt != "") {
     // sorts the table based on the key
