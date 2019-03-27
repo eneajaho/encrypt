@@ -97,7 +97,7 @@ var Binary = [
   [0, 1, 1, 1, 1, 1, 1, 1], // [SPACE]
   [1, 0, 0, 0, 0, 0, 0, 1], // ë
   [1, 0, 0, 0, 0, 0, 1, 0], // ç
-  [1, 0, 0, 0, 0, 0, 1, 1] // \n
+  [1, 0, 0, 0, 0, 0, 1, 1] // /n
 ];
 
 // chars
@@ -205,9 +205,16 @@ var char = [
 addRow("char-binary", Binary);
 
 var convertBtn = document.getElementById("chartobinary");
-convertBtn.addEventListener("click", function getWord() {
+convertBtn.addEventListener("click", function() {
   // get the encrypt key of the table
   var keyencrypt = document.getElementById("keyencrypt").value;
+  // get the word
+  var word = document.getElementById("word").value;
+
+  getWord(keyencrypt, word);
+});
+
+function getWord(keyencrypt, word) {
   // copy Binary table to a new one so we dont change the default values
   BinaryToShuffle = Array.from(Binary);
   // console.log(keyencrypt);
@@ -217,8 +224,6 @@ convertBtn.addEventListener("click", function getWord() {
   }
 
   addRow("char-binary", BinaryToShuffle);
-  // get the word
-  var word = document.getElementById("word").value;
 
   BitsMatrix = createBitsMatrix(word, BinaryToShuffle);
 
@@ -227,7 +232,7 @@ convertBtn.addEventListener("click", function getWord() {
   BitsText = BitsArray.join("");
 
   showText("coded", BitsText);
-});
+}
 
 /* Functions for creating and showing the BitsArray*/
 
@@ -273,10 +278,18 @@ function showText(id, text) {
 /* Converting Bits to characters */
 
 var decodeBtn = document.getElementById("binarytochar");
-decodeBtn.addEventListener("click", function turnBack() {
-  // get the encrypt key of the table
-  var keydecrypt = document.getElementById("keydecrypt").value;
 
+decodeBtn.addEventListener("click", function() {
+  // get the encrypt key of the table
+  keydecrypt = document.getElementById("keydecrypt").value;
+  // get the code from input form
+  code = document.getElementById("code").value;
+  code = code.replace(/\s+/g, "");
+
+  turnBack(keydecrypt, code);
+});
+
+function turnBack(keydecrypt, code) {
   BinaryToShuffle1 = Array.from(Binary);
 
   if (keydecrypt != "") {
@@ -286,13 +299,10 @@ decodeBtn.addEventListener("click", function turnBack() {
 
   addRow("char-binary", BinaryToShuffle1);
 
-  var code = document.getElementById("code").value;
-  code = code.replace(/\s+/g, "");
-
   CharArray = BitsToChars(code, BinaryToShuffle1);
   CharText = CharArray.join("");
   showText("decoded", CharText);
-});
+}
 
 function BitsToChars(code, arr) {
   // Declaring an array for later use
@@ -394,4 +404,12 @@ function getQueryVariable(variable) {
   return false;
 }
 
-console.log(getQueryVariable("b"));
+// if user inserts the word and key from url
+if (getQueryVariable("word") != "" && getQueryVariable("key") != "") {
+  getWord(getQueryVariable("key"), decodeURI(getQueryVariable("word")));
+}
+
+// if user inserts the code and key from url
+if (getQueryVariable("code") != "" && getQueryVariable("key") != "") {
+  turnBack(getQueryVariable("k"), getQueryVariable("b"));
+}
