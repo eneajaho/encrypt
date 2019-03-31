@@ -205,7 +205,7 @@ var char = [
 addRow("char-binary", Binary);
 
 var convertBtn = document.getElementById("chartobinary");
-convertBtn.addEventListener("click", function() {
+convertBtn.addEventListener("click", function () {
   // get the encrypt key of the table
   var keyencrypt = document.getElementById("keyencrypt").value;
   // get the word
@@ -279,7 +279,7 @@ function showText(id, text) {
 
 var decodeBtn = document.getElementById("binarytochar");
 
-decodeBtn.addEventListener("click", function() {
+decodeBtn.addEventListener("click", function () {
   // get the encrypt key of the table
   keydecrypt = document.getElementById("keydecrypt").value;
   // get the code from input form
@@ -378,7 +378,7 @@ function addRow(tableID, arr) {
 
 // Sort the table based on the key
 function sortTableSeedBased(arr, seed) {
-  arr.sort(function() {
+  arr.sort(function () {
     seed = getNextValue(seed);
     key = 0.5 - seed;
     //console.log(key);
@@ -412,4 +412,16 @@ if (getQueryVariable("word") != "" && getQueryVariable("key") != "") {
 // if user inserts the code and key from url
 if (getQueryVariable("code") != "" && getQueryVariable("key") != "") {
   turnBack(getQueryVariable("key"), getQueryVariable("code"));
+}
+
+
+
+// PWA
+window.onload = () => {
+  'use strict';
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('./sw.js');
+  }
 }
