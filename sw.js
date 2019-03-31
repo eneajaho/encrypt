@@ -1,11 +1,11 @@
 var cacheName = 'CryptMessage';
 
 var filesToCache = [
-    '/',
-    '/index.html',
-    '/style.css',
-    '/bg.jpg',
-    '/script.js'
+    '/encrypt/',
+    '/encrypt/index.html',
+    '/encrypt/style.css',
+    '/encrypt/bg.jpg',
+    '/encrypt/script.js'
 ];
 
 self.addEventListener('install', function (e) {
