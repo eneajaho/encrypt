@@ -414,8 +414,6 @@ if (getQueryVariable("code") != "" && getQueryVariable("key") != "") {
   turnBack(getQueryVariable("key"), getQueryVariable("code"));
 }
 
-
-
 // PWA
 window.onload = () => {
   'use strict';
