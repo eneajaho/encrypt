@@ -12,10 +12,18 @@
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="manifest" href="manifest.json" />
+
   <meta name="theme-color" content="black" />
+  <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="CryptMessage">
+  <link rel="apple-touch-icon" href="favicon.ico">
 
+  <meta name="msapplication-TileImage" content="favicon.ico">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
 
+  <link rel="manifest" href="manifest.json" />
 </head>
 
 <body id="body">
@@ -30,7 +38,7 @@
       <br />
       <br />
       <div class="row">
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-4 d-none d-md-block">
           <h4 class="text-center">Char / Binary Table</h4>
           <br />
           <table id="char-binary" class="table table-striped table-bordered table-hover">
