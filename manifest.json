@@ -1,9 +1,9 @@
 {
     "name": "CryptMessage",
     "icons": [{
-        "src": "favicon.ico",
+        "src": "logo.png",
         "sizes": "128x128",
-        "type": "image/ico"
+        "type": "image/png"
     }],
 
     "short_name": "CryptMessage",
