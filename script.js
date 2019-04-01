@@ -233,10 +233,8 @@ function getWord(keyencrypt, word) {
 
   showText("coded", BitsText);
 
-  document.getElementById("copy-btn").classList.remove('d-none');
-  document.getElementById("copy-btn").classList.add('d-block');
-  document.getElementById("share-btn").classList.remove('d-none');
-  document.getElementById("share-btn").classList.add('d-block');
+  document.getElementById("copy-btn").classList.remove('invisible');
+  document.getElementById("share-btn").classList.remove('invisible');
 }
 
 /* Functions for creating and showing the BitsArray*/
