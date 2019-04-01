@@ -454,7 +454,7 @@ if (getQueryVariable("code") != "") {
     turnBack(getQueryVariable("key"), getQueryVariable("code"));
   } else if (getQueryVariable("key") == "") {
     let askKey = prompt("Please enter the key:");
-    getWord(askKey, decodeURI(getQueryVariable("code")));
+    turnBack(askKey, decodeURI(getQueryVariable("code")));
   }
 }
 
