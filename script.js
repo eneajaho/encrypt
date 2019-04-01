@@ -417,7 +417,7 @@ function copyToClipboard(id, type) {
   if (type === "text") {
     el.value = str; // Set its value to the string that you want copied
   } else if (type === "link") {
-    el.value = "https://eneajaho.me/encrypt/?word=" + str;
+    el.value = "https://eneajaho.me/encrypt/?code=" + str;
   }
 
   el.setAttribute('readonly', ''); // Make it readonly to be tamper-proof
