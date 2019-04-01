@@ -78,9 +78,16 @@
             <br />
             <div class="lead">
               <code>
+
                 <div id="coded"></div>
+
               </code>
             </div>
+            <button id="copy-btn" onclick='copyToClipboard("coded", "text")'
+              class="d-none btn btn-primary">Copy</button>
+            <button id="share-btn" onclick='copyToClipboard("coded", "link")' class="d-none btn btn-primary">Share
+              Link</button>
+
             <br />
             <div id="error"></div>
           </div>

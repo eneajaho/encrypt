@@ -232,6 +232,11 @@ function getWord(keyencrypt, word) {
   BitsText = BitsArray.join("");
 
   showText("coded", BitsText);
+
+  document.getElementById("copy-btn").classList.remove('d-none');
+  document.getElementById("copy-btn").classList.add('d-block');
+  document.getElementById("share-btn").classList.remove('d-none');
+  document.getElementById("share-btn").classList.add('d-block');
 }
 
 /* Functions for creating and showing the BitsArray*/
@@ -404,22 +409,62 @@ function getQueryVariable(variable) {
   return false;
 }
 
+// copy to clipboard
+function copyToClipboard(id, type) {
+  let str = document.getElementById(id).innerHTML;
+  const el = document.createElement('textarea'); // Create a <textarea> element
+
+  if (type === "text") {
+    el.value = str; // Set its value to the string that you want copied
+  } else if (type === "link") {
+    el.value = "https://eneajaho.me/encrypt/?word=" + str;
+  }
+
+  el.setAttribute('readonly', ''); // Make it readonly to be tamper-proof
+  el.style.position = 'absolute';
+  el.style.left = '-9999px'; // Move outside the screen to make it invisible
+  document.body.appendChild(el); // Append the <textarea> element to the HTML document
+  const selected =
+    document.getSelection().rangeCount > 0 // Check if there is any content selected previously
+    ?
+    document.getSelection().getRangeAt(0) // Store selection if found
+    :
+    false; // Mark as false to know no selection existed before
+  el.select(); // Select the <textarea> content
+  document.execCommand('copy'); // Copy - only works as a result of a user action (e.g. click events)
+  document.body.removeChild(el); // Remove the <textarea> element
+  if (selected) { // If a selection existed before copying
+    document.getSelection().removeAllRanges(); // Unselect everything on the HTML document
+    document.getSelection().addRange(selected); // Restore the original selection
+  }
+};
+
+
 // if user inserts the word and key from url
-if (getQueryVariable("word") != "" && getQueryVariable("key") != "") {
-  getWord(getQueryVariable("key"), decodeURI(getQueryVariable("word")));
+if (getQueryVariable("word") != "") {
+  if (getQueryVariable("key") != "") {
+    getWord(getQueryVariable("key"), decodeURI(getQueryVariable("word")));
+  } else if (getQueryVariable("key") == "") {
+    let askKey = prompt("Please enter the key:");
+    getWord(askKey, decodeURI(getQueryVariable("word")));
+  }
 }
 
 // if user inserts the code and key from url
-if (getQueryVariable("code") != "" && getQueryVariable("key") != "") {
-  turnBack(getQueryVariable("key"), getQueryVariable("code"));
+if (getQueryVariable("code") != "") {
+  if (getQueryVariable("key") != "") {
+    turnBack(getQueryVariable("key"), getQueryVariable("code"));
+  } else if (getQueryVariable("key") == "") {
+    let askKey = prompt("Please enter the key:");
+    getWord(askKey, decodeURI(getQueryVariable("code")));
+  }
 }
 
 // PWA
 window.onload = () => {
-  'use strict';
+  "use strict";
 
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-      .register('./sw.js');
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js");
   }
-}
+};
