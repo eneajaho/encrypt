@@ -247,10 +247,11 @@ function createBitsMatrix(word, arr) {
   */
 
   var BitsMatrix = [];
-  for (i = 0; i < word.length; i++) {
-    for (j = 0; j < arr.length; j++) {
+  for (let i = 0; i < word.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
       if (word[i] == char[j]) {
         BitsMatrix.push(arr[j]);
+        break;
       }
     }
   }
@@ -262,10 +263,10 @@ function createBitsArray(word, BitsMatrix) {
   It has two arguments, word to get the length of the word and BitsMatrix 
   This converts and Matrix into and array
   */
-
   var BitsArray = [];
-  for (m = 0; m < word.length; m++) {
-    for (n = 0; n < 8; n++) {
+  var wLength = word.length;
+  for (let m = 0; m < wLength; m++) {
+    for (let n = 0; n < 8; n++) {
       BitsArray.push(BitsMatrix[m][n]);
     }
   }
@@ -274,9 +275,11 @@ function createBitsArray(word, BitsMatrix) {
 
 function showText(id, text) {
   // a function that accepts an id and text and
-  id = String(id);
+  let id = String(id);
   document.getElementById(id).innerHTML = text;
 }
+
+
 
 /* Converting Bits to characters */
 
@@ -288,11 +291,12 @@ decodeBtn.addEventListener("click", function () {
   // get the code from input form
   code = document.getElementById("code").value;
   code = code.replace(/\s+/g, "");
-
+  // decrypts the bits based on the key
   turnBack(keydecrypt, code);
 });
 
 function turnBack(keydecrypt, code) {
+  // creates a new array so we dont change the default one;
   BinaryToShuffle1 = Array.from(Binary);
 
   if (keydecrypt != "") {
@@ -314,32 +318,33 @@ function BitsToChars(code, arr) {
   let CharArray = [];
 
   // loops through the code
-  for (let a = 0; a < code.length; a++) {
+  var codeLength = code.length;
+  for (let a = 0; a < codeLength; a++) {
     // if 8 bits are completed than do ...
     if (a % 8 == 0) {
       // Declare BitCounter That will count from 0 to 7
       let BitCounter = 0;
       // j will start from a and will go to a+8 ..
-      for (j = a; j < a + 8; j++) {
+      for (let j = a; j < a + 8; j++) {
         // adds bit from code to SevenBitArray and than increases the counter
         SevenBitArray[BitCounter] = code[j];
         BitCounter++;
       }
       // after getting the array of bits we use the function EightBitsToChar to get the char of that group of bits
       // and than we add the char to a CharArray
-      Character = EightBitsToChar(SevenBitArray, arr);
-      CharArray.push(Character);
+      CharArray.push(EightBitsToChar(SevenBitArray, arr));
     }
   }
   return CharArray;
 }
 
-// accepts an array of bits, and return the character of that group of bits
+// accepts an array of bits, and returns the character of that group of bits
 function EightBitsToChar(bitsArray, arr) {
-  for (i = 0; i < arr.length; i++) {
-    // k to count if 5 bits are the same if yes add to array
+  var arrLength = arr.length;
+  for (let i = 0; i < arrLength; i++) {
+    // k to count if 8 bits are the same if yes add to array
     let k = 0;
-    for (j = 0; j < 8; j++) {
+    for (let j = 0; j < 8; j++) {
       if (bitsArray[j] == arr[i][j]) {
         k++;
       }
@@ -364,7 +369,8 @@ function addRow(tableID, arr) {
   // Get a reference to the table
   let tableRef = document.getElementById(tableID);
 
-  for (i = 0; i < arr.length; i++) {
+  var arrLength = arr.length;
+  for (i = 0; i < arrLength; i++) {
     let newRow = tableRef.insertRow(-1);
     // Insert a cell in the row at index 0
     let FirstCell = newRow.insertCell(0);
@@ -398,7 +404,8 @@ function getNextValue(seed) {
 function getQueryVariable(variable) {
   var query = window.location.search.substring(1);
   var vars = query.split("&");
-  for (var i = 0; i < vars.length; i++) {
+  var varsLength = vars.length;
+  for (var i = 0; i < varsLength; i++) {
     var pair = vars[i].split("=");
     if (pair[0] == variable) {
       return pair[1];
