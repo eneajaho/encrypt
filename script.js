@@ -275,7 +275,7 @@ function createBitsArray(word, BitsMatrix) {
 
 function showText(id, text) {
   // a function that accepts an id and text and
-  let id = String(id);
+  var id = String(id);
   document.getElementById(id).innerHTML = text;
 }
 
